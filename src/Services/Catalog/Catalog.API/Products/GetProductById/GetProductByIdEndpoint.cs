@@ -9,13 +9,15 @@
             {
                 var result = await sender.Send(new GetProductByIdQuery(id));
 
-                var response = result.Adapt<GetProductByIdResponse>();
+                if(result.Status == ResultStatus.NotFound)
+                    return Results.NotFound(result);
 
-                return Results.Ok(response);
+                return Results.Json(result);
             })
                  .WithName("GetProductById")
-                 .Produces<GetProductByIdResponse>(StatusCodes.Status200OK)
+                 .Produces<Result<GetProductByIdResult>>(StatusCodes.Status200OK)
                  .ProducesProblem(StatusCodes.Status400BadRequest)
+                 .ProducesProblem(StatusCodes.Status404NotFound)
                  .WithSummary("Get Product by Id")
                  .WithDescription("Get Product by Id");
         }

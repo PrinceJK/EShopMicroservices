@@ -1,6 +1,5 @@
 ﻿namespace Catalog.API.Products.GetProductByCategory
 {
-    public record GetProductByCategoryResponse(IEnumerable<Product> Products);
     public class GetProductByCategoryEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
@@ -9,12 +8,14 @@
             {
                 var result = await sender.Send(new GetProductByCategoryQuery(category));
 
-                var response = result.Adapt<GetProductByCategoryResponse>();
+                if (result.Status == ResultStatus.NotFound)
+                    return Results.NotFound(result);
 
-                return Results.Ok(response);
+                return Results.Json(result);
             })
             .WithName("GetProductByCategory")
-            .Produces<GetProductByCategoryResponse>(StatusCodes.Status200OK)
+            .Produces<Result<IEnumerable<GetProductByCategoryResult>>>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status404NotFound)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get Products by Category")
             .WithDescription("Get Products by Category");
