@@ -1,7 +1,4 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.API.Products.DeleteProduct;
-
-namespace Catalog.API.Products.GetProductById
+﻿namespace Catalog.API.Products.GetProductById
 {
     public record GetProductByIdQuery(Guid Id) : IQuery<Result<GetProductByIdResult>>;
     public record GetProductByIdResult(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price);
@@ -12,7 +9,7 @@ namespace Catalog.API.Products.GetProductById
         {
             var product = await session.LoadAsync<Product>(query.Id, cancellationToken);
 
-            if(product is null)
+            if (product is null)
                 throw new ProductNotFoundException(query.Id);
 
             var productResponse = product.Adapt<GetProductByIdResult>();

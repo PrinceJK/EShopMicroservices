@@ -1,8 +1,4 @@
-﻿
-using Catalog.API.Models;
-using Catalog.API.Products.GetProductById;
-
-namespace Catalog.API.Products.GetProductByCategory
+﻿namespace Catalog.API.Products.GetProductByCategory
 {
     public record GetProductByCategoryQuery(string Category) : IQuery<Result<IEnumerable<GetProductByCategoryResult>>>;
     public record GetProductByCategoryResult(Guid Id, string Name, List<string> Category, string Description, string ImageFile, decimal Price);
@@ -11,7 +7,7 @@ namespace Catalog.API.Products.GetProductByCategory
         public async Task<Result<IEnumerable<GetProductByCategoryResult>>> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)
         {
             var products = await session.Query<Product>()
-                .Where(p=>p.Category.Contains(query.Category))
+                .Where(p => p.Category.Contains(query.Category))
                 .ToListAsync(cancellationToken);
 
             if (!products.Any())
