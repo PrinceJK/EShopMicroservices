@@ -14,12 +14,10 @@ namespace Catalog.API.Products.GetProductById
     //    }
     //}
 
-    public class GetProductByIdQueryHandler(IDocumentSession session, ILogger<GetProductByIdQueryHandler> logger) : IQueryHandler<GetProductByIdQuery, Result<GetProductByIdResult>>
+    public class GetProductByIdQueryHandler(IDocumentSession session) : IQueryHandler<GetProductByIdQuery, Result<GetProductByIdResult>>
     {
         public async Task<Result<GetProductByIdResult>> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
         {
-            logger.LogInformation("GetProductByIdQueryHandler.Handle called with {@Query}", query);
-
             var product = await session.LoadAsync<Product>(query.Id, cancellationToken);
 
             if(product is null)
