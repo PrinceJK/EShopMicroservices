@@ -1,4 +1,5 @@
 ﻿
+using Catalog.API.Exceptions;
 using Catalog.API.Products.CreateProduct;
 
 namespace Catalog.API.Products.UpdateProduct
@@ -28,7 +29,7 @@ namespace Catalog.API.Products.UpdateProduct
             var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
 
             if (product is null)
-                return Result.NotFound("Product not found");
+                throw new ProductNotFoundException(command.Id);
 
             product.Name = command.Name;
             product.Category = command.Category;

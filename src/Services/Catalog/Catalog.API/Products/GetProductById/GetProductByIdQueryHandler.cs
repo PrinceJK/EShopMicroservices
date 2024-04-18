@@ -1,4 +1,5 @@
-﻿using Catalog.API.Products.DeleteProduct;
+﻿using Catalog.API.Exceptions;
+using Catalog.API.Products.DeleteProduct;
 
 namespace Catalog.API.Products.GetProductById
 {
@@ -22,7 +23,7 @@ namespace Catalog.API.Products.GetProductById
             var product = await session.LoadAsync<Product>(query.Id, cancellationToken);
 
             if(product is null)
-                return Result<GetProductByIdResult>.NotFound("Product not found!");
+                throw new ProductNotFoundException(query.Id);
 
             var productResponse = product.Adapt<GetProductByIdResult>();
 
