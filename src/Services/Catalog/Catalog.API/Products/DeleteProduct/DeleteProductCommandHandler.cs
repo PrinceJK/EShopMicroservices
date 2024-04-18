@@ -14,7 +14,7 @@
         public async Task<Result> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
         {
             session.Delete<Product>(command.Id);
-
+            await session.SaveChangesAsync(cancellationToken);
             return Result.Success();
         }
     }
