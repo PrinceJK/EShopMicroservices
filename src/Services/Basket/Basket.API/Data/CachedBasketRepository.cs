@@ -9,7 +9,7 @@ public class CachedBasketRepository(IBasketRepository repository, IDistributedCa
     {
         await repository.DeleteBasket(userName, cancellationToken);
 
-        await cache.RefreshAsync(userName, cancellationToken);
+        await cache.RemoveAsync(userName, cancellationToken);
         return true;
     }
 
