@@ -6,16 +6,16 @@ public class DeleteBasketCommandValidator : AbstractValidator<DeleteBasketComman
 {
     public DeleteBasketCommandValidator()
     {
-        RuleFor(x=>x.UserName).NotEmpty().WithMessage("Username is required");
+        RuleFor(x => x.UserName).NotEmpty().WithMessage("Username is required");
     }
 }
 
-public class DeleteBasketCommandHandler : ICommandHandler<DeleteBasketCommand, Result<bool>>
+public class DeleteBasketCommandHandler(IBasketRepository repository) : ICommandHandler<DeleteBasketCommand, Result<bool>>
 {
-    public async Task<Result<bool>> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
     {
         //TODO: delete basket from database and cache
-        //session.Delete<Product>(command.Id);
+        await repository.DeleteBasket(command.UserName, cancellationToken);
 
         return Result.Success(true);
     }
