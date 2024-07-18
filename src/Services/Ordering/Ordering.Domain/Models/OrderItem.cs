@@ -1,6 +1,4 @@
-﻿using Ordering.Domain.Abstractions;
-
-namespace Ordering.Domain.Models;
+﻿namespace Ordering.Domain.Models;
 public class OrderItem : Entity<Guid>
 {
 	internal OrderItem(Guid orderId, Guid productId, int quantity, decimal price)
