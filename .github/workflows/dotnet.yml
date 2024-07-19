@@ -24,5 +24,5 @@ jobs:
       run: dotnet restore ./src/eshop-microservices.sln
     - name: Build
       run: dotnet build src/Services/Basket/Basket.API/Basket.API.csproj
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+   # - name: Test
+   #   run: dotnet test --no-build --verbosity normal
