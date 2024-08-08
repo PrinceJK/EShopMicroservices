@@ -1,4 +1,5 @@
-﻿using Ordering.Domain.Events;
+﻿using Ordering.Domain.Enums;
+using Ordering.Domain.Events;
 
 namespace Ordering.Domain.Models;
 public class Order : Aggregate<OrderId>
