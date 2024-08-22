@@ -1,6 +1,4 @@
-﻿using Ordering.Domain.Abstractiobs;
-
-namespace Ordering.Domain.Abstractions;
+﻿namespace Ordering.Domain.Abstractions;
 public abstract class Entity<T> : IEntity<T>
 {
 	public T Id { get; set; }
