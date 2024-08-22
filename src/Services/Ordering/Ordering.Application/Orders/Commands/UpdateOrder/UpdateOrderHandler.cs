@@ -6,12 +6,7 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext)
     {
         var orderId = OrderId.Of(command.Order.Id);
         var order = await dbContext.Orders
-            .FindAsync([orderId], cancellationToken: cancellationToken);
-
-        if (order is null)
-        {
-            throw new OrderNotFoundException(command.Order.Id);
-        }
+            .FindAsync([orderId], cancellationToken: cancellationToken) ?? throw new OrderNotFoundException(command.Order.Id);
 
         UpdateOrderWithNewValues(order, command.Order);
 
