@@ -1,7 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-
-namespace Ordering.Application.Orders.Commands.CreateOrder;
+﻿namespace Ordering.Application.Orders.Commands.CreateOrder;
 public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateOrderCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
@@ -10,7 +7,7 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
 
         await dbContext.Orders.AddAsync(order);
         await dbContext.SaveChangesAsync(cancellationToken);
-        
+
         return Result<Guid>.Success(order.Id.Value);
     }
 
