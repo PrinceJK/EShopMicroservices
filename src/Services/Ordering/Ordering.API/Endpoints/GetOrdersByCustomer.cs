@@ -10,9 +10,7 @@ public class GetOrdersByCustomer : ICarterModule
         {
             var result = await sender.Send(new GetOrdersByCustomerQuery(customerId));
 
-            var response = result.Adapt<Result<IEnumerable<OrderDto>>>();
-
-            return Results.Ok(response);
+            return Results.Ok(result);
         })
         .WithName("GetOrdersByCustomer")
         .Produces<Result<IEnumerable<OrderDto>>>(StatusCodes.Status200OK)

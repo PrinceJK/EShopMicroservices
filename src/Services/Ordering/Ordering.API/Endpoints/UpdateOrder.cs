@@ -14,9 +14,7 @@ public class UpdateOrder : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<Result>();
-
-            return Results.Ok(response);
+            return Results.Ok(result);
         })
         .WithName("UpdateOrder")
         .Produces<Result>(StatusCodes.Status200OK)

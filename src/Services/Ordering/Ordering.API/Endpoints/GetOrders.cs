@@ -11,9 +11,7 @@ public class GetOrders : ICarterModule
         {
             var result = await sender.Send(new GetOrdersQuery(request));
 
-            var response = result.Adapt<Result<PaginatedResult<OrderDto>>>();
-
-            return Results.Ok(response);
+            return Results.Ok(result);
         })
         .WithName("GetOrders")
         .Produces<Result<PaginatedResult<OrderDto>>>(StatusCodes.Status200OK)

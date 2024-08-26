@@ -10,9 +10,7 @@ public class DeleteOrder : ICarterModule
         {
             var result = await sender.Send(new DeleteOrderCommand(Id));
 
-            var response = result.Adapt<Result>();
-
-            return Results.Ok(response);
+            return Results.Ok(result);
         })
         .WithName("DeleteOrder")
         .Produces<Result>(StatusCodes.Status200OK)
