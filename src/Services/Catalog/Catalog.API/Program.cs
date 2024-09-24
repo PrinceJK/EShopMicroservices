@@ -14,7 +14,7 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddMarten(opts =>
 {
-    opts.Connection(builder.Configuration.GetConnectionString("DefaultConnection")!);
+    opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
 
 if (builder.Environment.IsDevelopment())
@@ -24,7 +24,7 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!);
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
 
