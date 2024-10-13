@@ -1,17 +1,16 @@
-namespace Shopping.Web.Pages
+namespace Shopping.Web.Pages;
+
+public class ConfirmationModel : PageModel
 {
-    public class ConfirmationModel : PageModel
+    public string Message { get; set; } = default!;
+
+    public void OnGetContact()
     {
-        public string Message { get; set; } = default!;
+        Message = "Your email was sent.";
+    }
 
-        public void OnGetContact()
-        {
-            Message = "Your email was sent.";
-        }
-
-        public void OnGetOrderSubmitted()
-        {
-            Message = "Your order submitted successfully.";
-        }
+    public void OnGetOrderSubmitted()
+    {
+        Message = "Your order submitted successfully.";
     }
 }
