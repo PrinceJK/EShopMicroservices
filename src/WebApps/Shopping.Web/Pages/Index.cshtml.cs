@@ -8,8 +8,8 @@ public class IndexModel
     public async Task<IActionResult> OnGetAsync()
     {
         logger.LogInformation("Index page visited");
-        //var result = await catalogService.GetProducts();
-        var result = await catalogService.GetProducts(2, 3);
+        var result = await catalogService.GetProducts();
+        //var result = await catalogService.GetProducts(2, 3);
         ProductList = result.Value;
         return Page();
     }
